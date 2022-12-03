@@ -1,13 +1,13 @@
 from src.modelo.Actor import Actor
 from src.modelo.Movie import Movie
 from sqlalchemy.exc import SQLAlchemyError
-from src.modelo.base import session
+from src.modelo.declarative_base import session
 
 class PersistenciaActor():
-    def agregarActor(self, titulo):
-        busqueda = session.query(Actor).filter(Actor.titulo == titulo).all()
+    def agregarActor(self, name):
+        busqueda = session.query(Actor).filter(Actor.name == name).all()
         if len(busqueda) == 0:
-            actor = Actor(titulo=titulo)
+            actor = Actor(name=name)
             session.add(actor)
             session.commit()
             return True
@@ -16,9 +16,9 @@ class PersistenciaActor():
 
     def VerFilas(self):
         actores = session.query(Actor).all()
-        print('\n### actores:')
+        print('\n### Actores:')
         for actor in actores:
-            print(f'id: {Actor.id} Título: {Actor.titulo}')
+            print(f'id: {actor.id} Name: {actor.name}')
         print('')
 
     def eliminarFilaAFila(self):
@@ -28,7 +28,7 @@ class PersistenciaActor():
         session.commit()
 
     def eliminarFilaSQL(self):
-        sentencia = "DELETE  from articles"
+        sentencia = "DELETE  from actores"
         try:
             data_source = session.execute(sentencia)
             session.commit()

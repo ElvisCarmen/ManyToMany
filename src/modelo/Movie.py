@@ -1,7 +1,7 @@
 from sqlalchemy import Column, String, Integer, Date, Table, ForeignKey
 from sqlalchemy.orm import relationship
 
-from base import Base
+from .declarative_base import Base
 
 movies_actors_association = Table(
     'movies_actors', Base.metadata,

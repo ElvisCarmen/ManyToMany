@@ -1,13 +1,13 @@
 from src.modelo.Actor import Actor
 from src.modelo.Movie import Movie
 from sqlalchemy.exc import SQLAlchemyError
-from src.modelo.base import Session, engine, Base
+from src.modelo.declarative_base import session, engine, Base, session
 
 class PersistenciaMovie():
-    def agregarMovie(self, comentario):
+    def agregarMovie(self, pelicula):
 
-        if len(comentario) > 0:
-            movie = Movie(comentario=comentario)
+        if len(pelicula) > 0:
+            movie = Movie(pelicula=pelicula)
             session.add(movie)
             session.commit()
             return True
@@ -18,7 +18,7 @@ class PersistenciaMovie():
         movies = session.query(Movie).all()
         print('\n### Movies:')
         for movie in movies:
-            print(f'id: {movie.id} Comentario: {movie.comentario}, del artículo: {comment.article_id}')
+            print(f'id: {movie.id} Movies: {movie.pelicula}, del actor: {movie.actor_id}')
         print('')
 
     def eliminarFilaAFila(self):
